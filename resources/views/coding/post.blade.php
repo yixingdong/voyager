@@ -56,8 +56,13 @@
                             </div>
                         </div>
                         <div class="content-footer">
-                            <span class="text-muted pull-left">发布日期：{{$post->created_at}}</span>
-                            <span class="text-muted pull-right">人生都是自己放弃的</span>
+                            <span class="text-muted pull-left">
+                                @if(Auth::check())
+                                <a href="/login">登陆 - 评论</a>
+                                @else
+                                <a href="/login">登陆 - 评论</a>
+                                @endif
+                            </span>
                         </div>
                         <br>
                     </div>
@@ -74,7 +79,9 @@
 @section('js')
 <script>
     $(window).load(function(){
-        $(".post-content img").addClass("img-responsive center-block img-rounded img-raised");
+        $(".post-content").css('line-height','2em').css('letter-spacing','1px').css('text-align','justify');
+        $(".post-content p").css('margin','20px 0');
+        $(".post-content img").css('margin','30px 0').addClass("img-responsive center-block img-rounded img-raised");
         $("pre").css("font-family", "Microsoft YaHei UI Light")
             .css('letter-spacing','1px')
             .css('line-height','2em');
