@@ -64,6 +64,37 @@
                                 @endif
                             </span>
                         </div>
+                        <div class="section section-comments">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="media-area">
+                                        <h3 class="title text-center">{{$post->comments->count()}} Comments</h3>
+                                        {!! $post->showComments() !!}
+                                    </div>
+                                    <h3 class="title text-center">Write What You Want</h3>
+                                    <div class="media media-post">
+                                        <a class="pull-left author" href="#pablo">
+                                            <div class="avatar">
+                                                <img class="media-object" alt="64x64" src="/storage/{{Auth::user()->avatar}}" width="150" height="150">
+                                            </div>
+                                        </a>
+                                        <div class="media-body">
+                                            <form id="post-comment" method="post" action="">
+                                                <div class="form-group is-empty">
+                                                    <input type="hidden" name="post" value="{{$post->id}}"/>
+                                                    <input type="hidden" name="parent" value=""/>
+                                                    <textarea class="form-control" placeholder="请在此散发你的荷尔蒙" rows="6"></textarea>
+                                                    <span class="material-input"></span>
+                                                </div>
+                                                <div class="media-footer">
+                                                    <button href="#pablo" class="btn btn-success btn-round btn-wd pull-right">发表评论</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div> <!-- end media-post -->
+                                </div>
+                            </div>
+                        </div>
                         <br>
                     </div>
                 </div>

@@ -64,3 +64,15 @@ $factory->define(\App\Book::class,function(Faker\Generator $faker){
         'name'  => $faker->title
     ];
 });
+
+$factory->define(\App\Comment::class,function (\Faker\Generator $faker){
+    $postIds = \App\Post::pluck('id')->toArray();
+    $userIds = \App\User::pluck('id')->toArray();
+    return [
+        'name'     => $faker->name(),
+        'body'     => $faker->paragraph,
+        'user_id'  => $faker->randomElement($userIds),
+        'target_id' => 60,
+        'parent_id' => 2002
+    ];
+});
