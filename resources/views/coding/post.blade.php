@@ -68,7 +68,7 @@
                                         {!! $post->showComments() !!}
                                     </div>
                                     @if(Auth::check())
-                                    <h3 class="title text-center">Write What You Want</h3>
+                                    <h3 id="comment-title" class="title text-center">Write What You Want</h3>
                                     <div class="media media-post">
                                         <a class="pull-left author" href="#pablo">
                                             <div class="avatar">
@@ -79,7 +79,7 @@
                                             <form id="post-comment" method="post" action="{{route('comment.store')}}">
                                                 <div class="form-group is-empty">
                                                     {!! csrf_field() !!}
-                                                    <input type="hidden" name="post" value="{{$post->id}}"/>
+                                                    <input type="hidden" name="target" value="{{$post->id}}"/>
                                                     <input id="comment-parent" type="hidden" name="parent" value=""/>
                                                     <textarea id="comment-tt" name="content" class="form-control" placeholder="请开始你的表演" rows="6"></textarea>
                                                     <span class="material-input"></span>
@@ -118,8 +118,9 @@
             .css('line-height','2em');
         $(".action-replay").click(function () {
             @if(Auth::check())
+            $('#comment-title').text('@'+$(this).data('user')+',我有话说');
             $('#comment-parent').val($(this).data('parent'));
-            $.scrollTo('#post-comment',500);
+            $.scrollTo('#post-comment');
             $('#comment-tt').focus();
             @else
             window.location.href="/login";

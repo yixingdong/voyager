@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
+    protected $fillable = ['user_id','target_id','parent_id','body'];
     /**
      * 当前这条评论数据所属的用户.
      */
@@ -56,8 +57,8 @@ class Comment extends Model
 
         {$this->body}
         
-        <div class="media-footer">
-            <button class="action-replay btn pull-right"  data-parent="{$this->id}">
+        <div class="media-footer" style="height: 40px">
+            <button class="action-replay btn pull-right"  data-user="{$this->user->name}" data-parent="{$this->id}">
                 回复
                 <div class="ripple-container"></div>
              </button> 
