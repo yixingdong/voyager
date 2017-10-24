@@ -55,15 +55,11 @@
                                 {!! $post->body !!}
                             </div>
                         </div>
+                        @if(!Auth::check())
                         <div class="content-footer">
-                            <span class="text-muted pull-left">
-                                @if(Auth::check())
-                                <a href="/login">登陆 - 评论</a>
-                                @else
-                                <a href="/login">登陆 - 评论</a>
-                                @endif
-                            </span>
+                            <a class="text-mute text-success" href="/login">登陆 - 评论</a>
                         </div>
+                        @endif
                         <div class="section section-comments">
                             <div class="row">
                                 <div class="col-md-12">
@@ -71,6 +67,7 @@
                                         <h3 class="title text-center">{{$post->comments->count()}} Comments</h3>
                                         {!! $post->showComments() !!}
                                     </div>
+                                    @if(Auth::check())
                                     <h3 class="title text-center">Write What You Want</h3>
                                     <div class="media media-post">
                                         <a class="pull-left author" href="#pablo">
@@ -79,11 +76,12 @@
                                             </div>
                                         </a>
                                         <div class="media-body">
-                                            <form id="post-comment" method="post" action="">
+                                            <form id="post-comment" method="post" action="{{route('comment.store')}}">
                                                 <div class="form-group is-empty">
+                                                    {!! csrf_field() !!}
                                                     <input type="hidden" name="post" value="{{$post->id}}"/>
-                                                    <input type="hidden" name="parent" value=""/>
-                                                    <textarea class="form-control" placeholder="请在此散发你的荷尔蒙" rows="6"></textarea>
+                                                    <input id="comment-parent" type="hidden" name="parent" value=""/>
+                                                    <textarea id="comment-tt" name="content" class="form-control" placeholder="请开始你的表演" rows="6"></textarea>
                                                     <span class="material-input"></span>
                                                 </div>
                                                 <div class="media-footer">
@@ -92,6 +90,7 @@
                                             </form>
                                         </div>
                                     </div> <!-- end media-post -->
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -108,6 +107,7 @@
 </div>
 @endsection
 @section('js')
+<script src="https://cdn.bootcss.com/jquery-scrollTo/2.1.1/jquery.scrollTo.min.js"></script>
 <script>
     $(window).load(function(){
         $(".post-content").css('line-height','2em').css('letter-spacing','1px').css('text-align','justify');
@@ -116,6 +116,15 @@
         $("pre").css("font-family", "Microsoft YaHei UI Light")
             .css('letter-spacing','1px')
             .css('line-height','2em');
+        $(".action-replay").click(function () {
+            @if(Auth::check())
+            $('#comment-parent').val($(this).data('parent'));
+            $.scrollTo('#post-comment',500);
+            $('#comment-tt').focus();
+            @else
+            window.location.href="/login";
+            @endif
+        });
     })
 </script>
 @endsection

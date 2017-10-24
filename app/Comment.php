@@ -57,9 +57,10 @@ class Comment extends Model
         {$this->body}
         
         <div class="media-footer">
-            <a href="#pablo" class="btn btn-primary btn-simple pull-right" rel="tooltip" title="" data-original-title="Reply to Comment">
-                Reply
-                <div class="ripple-container"></div></a> 
+            <button class="action-replay btn pull-right"  data-parent="{$this->id}">
+                回复
+                <div class="ripple-container"></div>
+             </button> 
         </div>
         {$this->showChildren()}
     </div>
