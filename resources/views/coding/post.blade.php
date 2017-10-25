@@ -57,9 +57,10 @@
                         </div>
                         @if(!Auth::check())
                         <div class="content-footer">
-                            <a class="text-mute text-success" href="/login">登陆 - 评论</a>
+                            <a class="btn btn-lg btn-success text-mute" href="/login">登录参与评论</a>
                         </div>
                         @endif
+                        <br/><br/>
                         <div class="section section-comments">
                             <div class="row">
                                 <div class="col-md-12">

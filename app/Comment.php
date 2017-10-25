@@ -58,7 +58,7 @@ class Comment extends Model
         {$this->body}
         
         <div class="media-footer" style="height: 40px">
-            <button class="action-replay btn pull-right"  data-user="{$this->user->name}" data-parent="{$this->id}">
+            <button class="action-replay btn btn-sm btn-danger pull-right"  data-user="{$this->user->name}" data-parent="{$this->id}" style="font-size: 16px">
                 回复
                 <div class="ripple-container"></div>
              </button> 
@@ -66,12 +66,15 @@ class Comment extends Model
         {$this->showChildren()}
     </div>
 </div>
+<br/>
 EOF;
         return $output;
     }
 
     /**
      * 显示子评论信息
+     *
+     * @return string
      */
     public function showChildren()
     {
