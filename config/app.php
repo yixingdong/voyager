@@ -172,6 +172,7 @@ return [
         Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
         DevDojo\Chatter\ChatterServiceProvider::class,
         Backup\BackupServiceProvider::class,
+        Roumen\Sitemap\SitemapServiceProvider::class,
 
 
         /*

@@ -5,7 +5,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset('/')}}/assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="{{asset('/')}}/assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    {!! SEOMeta::generate() !!}
+    {!! SEO::generate() !!}
     <meta name="author" content="王国营" />
     <link href="{{asset('/')}}/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="{{asset('/')}}/assets/css/material-kit.css" rel="stylesheet"/>

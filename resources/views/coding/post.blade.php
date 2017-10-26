@@ -55,9 +55,10 @@
                                 {!! $post->body !!}
                             </div>
                         </div>
+                        <br/><br/>
                         @if(!Auth::check())
                         <div class="content-footer">
-                            <a class="btn btn-lg btn-success text-mute" href="/login">登录参与评论</a>
+                            <a class="btn btn-lg btn-success text-mute" href="/login" style="width: 100%">登录参与评论</a>
                         </div>
                         @endif
                         <br/><br/>
@@ -69,7 +70,7 @@
                                         {!! $post->showComments() !!}
                                     </div>
                                     @if(Auth::check())
-                                    <h3 id="comment-title" class="title text-center">Write What You Want</h3>
+                                    <h3 id="comment-title" class="title text-center">Leave Your Reply</h3>
                                     <div class="media media-post">
                                         <a class="pull-left author" href="#pablo">
                                             <div class="avatar">
