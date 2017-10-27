@@ -29,8 +29,15 @@ Route::get('lesson/{lesson}','LessonController@show');
 
 Route::resource('comment','CommentController');
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin-coding'], function () {
     Voyager::routes();
 });
 
 Route::get('books','BookController@index');
+
+Route::get('sitemap', 'SiteMapController@sitemap');
+
+Route::get('time',function (){
+    $now = \Carbon\Carbon::now()->format('Y-m-d h:i:s');
+    dd($now);
+});
