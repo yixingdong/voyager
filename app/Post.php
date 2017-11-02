@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\Cache;
 use TCG\Voyager\Models\Post as VoyagerPost;
 
 class Post extends VoyagerPost
@@ -11,7 +12,7 @@ class Post extends VoyagerPost
      */
     public function comments()
     {
-        return $this->hasMany(Comment::class,'target_id');
+        return $this->hasMany(Comment::class,'target_id')->with('user');
     }
 
     /**
@@ -19,8 +20,12 @@ class Post extends VoyagerPost
      */
     public function getRootCommentsAttribute()
     {
-        return Comment::where('target_id',$this->id)
-            ->where('parent_id',null)->get();
+//        return Comment::where('target_id',$this->id)
+//            ->where('parent_id',null)->get();
+        return Cache::rememberForever('cc.post.root_comments.'.$this->id, function(){
+            return Comment::where('target_id',$this->id)
+                ->where('parent_id',null)->with('children','user')->get();
+        });
     }
 
     /**

@@ -173,6 +173,7 @@ return [
         DevDojo\Chatter\ChatterServiceProvider::class,
         Backup\BackupServiceProvider::class,
         Roumen\Sitemap\SitemapServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
 
         /*
