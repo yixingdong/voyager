@@ -66,7 +66,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="media-area">
-                                        <h3 class="title text-center">{{$comments->count()}} Comments</h3>
+                                        <h3 class="title text-center">{{$post->comments->count()}} Comments</h3>
                                         {!! $post->showComments() !!}
                                     </div>
                                     @if(Auth::check())

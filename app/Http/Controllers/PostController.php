@@ -20,27 +20,23 @@ class PostController extends Controller
 
         $page = is_null($request->get('page'))?1:$request->get('page');
 
-        $posts = Cache::remember('posts.'.$page, 10,function() use ($page){
+        $posts = Cache::rememberForever('posts.'.$page, function() use ($page){
             return Post::paginate(10);
         });
-        //$posts = Post::paginate(10);
+
         return view('coding.posts',compact('posts'));
     }
 
     public function show($id)
     {
         $post = Cache::rememberForever('cc.post.'.$id, function() use ($id){
-            return Post::where('id',$id)->firstOrFail();
-        });
-
-        $comments = Cache::rememberForever('cc.post.comment'.$id, function() use ($post){
-            return $post->comments;
+            return Post::with('comments')->where('id',$id)->firstOrFail();
         });
 
         $this->seo()->setTitle($post->seo_title);
         $this->seo()->setDescription($post->meta_description);
         $this->seo()->setCanonical(url('post/'.$post->id));
 
-        return view('coding.post',compact('post','comments'));
+        return view('coding.post',compact('post'));
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class CommentController extends Controller
 {
@@ -39,13 +40,21 @@ class CommentController extends Controller
         if(Auth::check()){
             $targetId = $request->get('target');
             $body = $request->get('content');
-            if($targetId && $body)
+            if($targetId && $body){
                 Comment::create([
                     'user_id'  => Auth::user()->id,
                     'target_id' => $targetId,
                     'parent_id' => $request->get('parent'),
                     'body'      => $body
                 ]);
+
+                //dd(url('user/profile', [1]));
+                $url_str = url()->previous();
+                dd($url_str,substr($url_str,strrpos($url_str,'/')+1));
+
+                Cache::forget('cc.post.'.$targetId);
+                Cache::forget('cc.post.root_comments.'.$targetId);
+            }
         }
         return redirect()->back();
     }

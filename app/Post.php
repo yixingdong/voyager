@@ -20,8 +20,6 @@ class Post extends VoyagerPost
      */
     public function getRootCommentsAttribute()
     {
-//        return Comment::where('target_id',$this->id)
-//            ->where('parent_id',null)->get();
         return Cache::rememberForever('cc.post.root_comments.'.$this->id, function(){
             return Comment::where('target_id',$this->id)
                 ->where('parent_id',null)->with('children','user')->get();
